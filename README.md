@@ -1,2 +1,4 @@
-# ikt-backend-basics
-Materials for the backend course for IKT
+# IKT backend
+Materials for the IKT backend basic course
+
+* class 1: my-first-project
