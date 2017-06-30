@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyFirstController {
-
+	
 	@RequestMapping("/")
 	public String hello() {
 		return "Moja prva aplikacija";
