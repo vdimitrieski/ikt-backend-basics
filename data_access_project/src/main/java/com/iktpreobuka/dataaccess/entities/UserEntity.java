@@ -1,9 +1,13 @@
 package com.iktpreobuka.dataaccess.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class UserEntity {
@@ -12,6 +16,18 @@ public class UserEntity {
 	private Integer id;
 	private String name;
 	private String email;
+
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "address")
+	private AddressEntity address;
+	
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
 
 	public UserEntity() {
 		super();
@@ -40,5 +56,7 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
 
 }

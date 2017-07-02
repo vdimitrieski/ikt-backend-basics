@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iktpreobuka.dataaccess.entities.AddressEntity;
 import com.iktpreobuka.dataaccess.entities.UserEntity;
+import com.iktpreobuka.dataaccess.repositories.AddressRepository;
 import com.iktpreobuka.dataaccess.repositories.UserRepository;
 
 @RestController
@@ -15,6 +17,9 @@ import com.iktpreobuka.dataaccess.repositories.UserRepository;
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public UserEntity addNewUser(@RequestParam String name, @RequestParam String email) {
@@ -28,6 +33,15 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Iterable<UserEntity> getAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/{id}/address")
+	public UserEntity addAddressToAUser(@PathVariable Integer id, @RequestParam Integer address) {
+		UserEntity user = userRepository.findOne(id);
+		AddressEntity adr = addressRepository.findOne(address);
+		user.setAddress(adr);
+		userRepository.save(user); // automatski ce biti sacuvana i adresa
+		return user;
 	}
 
 	// zadatak 1.2
@@ -46,7 +60,7 @@ public class UserController {
 		if (email != null) {
 			user.setEmail(email);
 		}
-		user = userRepository.save(user);
+		userRepository.save(user);
 		return user;
 	}
 
