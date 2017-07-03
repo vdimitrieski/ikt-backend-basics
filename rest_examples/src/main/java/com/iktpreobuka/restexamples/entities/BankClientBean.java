@@ -6,6 +6,15 @@ public class BankClientBean {
 	protected String name;
 	protected String surname;
 	protected String email;
+	
+	
+	public BankClientBean(Integer id, String name, String surname, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+	}
 	public BankClientBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -32,13 +41,6 @@ public class BankClientBean {
 		return email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
-	}
-	public BankClientBean(Integer id, String name, String surname, String email) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
 		this.email = email;
 	}
 	
