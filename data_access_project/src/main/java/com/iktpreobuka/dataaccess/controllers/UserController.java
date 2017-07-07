@@ -1,5 +1,7 @@
 package com.iktpreobuka.dataaccess.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import com.iktpreobuka.dataaccess.entities.AddressEntity;
 import com.iktpreobuka.dataaccess.entities.UserEntity;
 import com.iktpreobuka.dataaccess.repositories.AddressRepository;
 import com.iktpreobuka.dataaccess.repositories.UserRepository;
+import com.iktpreobuka.dataaccess.services.AddressDao;
 
 @RestController
 @RequestMapping(path = "/api/v1/users")
@@ -20,6 +23,8 @@ public class UserController {
 
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	
 
 	@RequestMapping(method = RequestMethod.POST)
 	public UserEntity addNewUser(@RequestParam String name, @RequestParam String email) {
@@ -27,6 +32,8 @@ public class UserController {
 		user.setName(name);
 		user.setEmail(email);
 		userRepository.save(user);
+		 
+		
 		return user;
 	}
 
@@ -43,12 +50,25 @@ public class UserController {
 		userRepository.save(user); // automatski ce biti sacuvana i adresa
 		return user;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// zadatak 1.2
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public UserEntity findById(@PathVariable Integer id) {
 		return userRepository.findOne(id);
 	}
+	
+	
+	
+	
+	
 
 	// zadatak 1.2
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
@@ -63,6 +83,11 @@ public class UserController {
 		userRepository.save(user);
 		return user;
 	}
+	
+	
+	
+	
+	
 
 	// zadatak 1.2
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
