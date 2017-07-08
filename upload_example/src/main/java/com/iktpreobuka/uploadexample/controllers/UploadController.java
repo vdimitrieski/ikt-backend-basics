@@ -2,6 +2,8 @@ package com.iktpreobuka.uploadexample.controllers;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,11 @@ import com.iktpreobuka.uploadexample.services.FileHandler;
 @Controller
 @RequestMapping(path = "/")
 public class UploadController {
+	
+	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private FileHandler fileHandler;
+	@Autowired
+    private FileHandler fileHandler; 
 
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
@@ -31,6 +35,10 @@ public class UploadController {
     	String result = null;
         try {
 			 result = fileHandler.singleFileUpload(file, redirectAttributes);
+			 logger.debug("This is a debug message");
+		     logger.info("This is an info message");
+		     logger.warn("This is a warn message");
+		     logger.error("This is an error message");
 		} catch (IOException e) {
 			
 			e.printStackTrace();

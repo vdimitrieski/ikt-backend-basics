@@ -7,13 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.iktpreobuka.dataaccess.entities.AddressEntity;
 
-@Repository
+@Service
 public class AddressDaoImpl implements AddressDao{
 	
+		
 	@PersistenceContext
     EntityManager em;
 
@@ -27,7 +28,7 @@ public class AddressDaoImpl implements AddressDao{
 		Query query = em.createQuery(sql);
         query.setParameter("name", name);
         
-        List<AddressEntity> result = new ArrayList<>();
+        List<AddressEntity> result = new ArrayList<AddressEntity>();
         result = query.getResultList();
         return result;
         
