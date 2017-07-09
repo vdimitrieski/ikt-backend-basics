@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Repository
+@Service
 public class FileHandlerImpl implements FileHandler{
 
 	//Save the uploaded file to this folder
@@ -23,12 +23,15 @@ public class FileHandlerImpl implements FileHandler{
         }
 
         try {
-
+        	Path dir = Paths.get(UPLOADED_FOLDER);
+        	if (!Files.exists(dir))
+        	    Files.createDirectories(dir);
+        	
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
-
+            
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
