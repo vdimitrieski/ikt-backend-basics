@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,29 +49,47 @@ public class UserController {
 
 		addr.getUsers().add(ue);
 		addr.getUsers().add(ue1);
-		
+
 		list.add(ue);
 		list.add(ue1);
 
 		return list;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value="/public")
+	@RequestMapping(method = RequestMethod.GET, value = "/public")
 	@JsonView(Views.Public.class)
 	public List<UserEntity> getAllUsers() {
 		return getDummyDB();
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value="/private")
+
+	@RequestMapping(method = RequestMethod.GET, value = "/private")
 	@JsonView(Views.Private.class)
 	public List<UserEntity> getAllUsersForPrivate() {
 		return getDummyDB();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value="/admin")
+	@RequestMapping(method = RequestMethod.GET, value = "/admin")
 	@JsonView(Views.Admin.class)
 	public List<UserEntity> getAllUsersForAdmin() {
 		return getDummyDB();
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	@JsonView(Views.Admin.class)
+	public ResponseEntity<?> getUserByID(@PathVariable Integer id) {
+		try {
+			List<UserEntity> users = getDummyDB();
+			for (UserEntity userEntity : users) {
+				if (userEntity.getId().equals(id)) {
+					// ako je korisnik pronadjen vratiti 200
+					return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
+				}
+			}
+			// ako korisnik nije pronadjen vratiti 404
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) { // u slucaju izuzetka vratiti 500
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
