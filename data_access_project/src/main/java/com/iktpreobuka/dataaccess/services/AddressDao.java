@@ -8,5 +8,4 @@ public interface AddressDao {
 	
 	public List<AddressEntity> findAdressesByUserName(String name);
 	
-
 }
