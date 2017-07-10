@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.iktpreobuka.serialization.controllers.util.RESTError;
 import com.iktpreobuka.serialization.entities.AddressEntity;
 import com.iktpreobuka.serialization.entities.UserEntity;
 import com.iktpreobuka.serialization.security.Views;
@@ -86,9 +87,10 @@ public class UserController {
 				}
 			}
 			// ako korisnik nije pronadjen vratiti 404
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<RESTError>(new RESTError(1, "User not found"), HttpStatus.NOT_FOUND);
 		} catch (Exception e) { // u slucaju izuzetka vratiti 500
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<RESTError>(new RESTError(2, "Exception occurred: " + e.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
