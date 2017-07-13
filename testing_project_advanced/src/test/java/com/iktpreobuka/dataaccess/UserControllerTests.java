@@ -87,18 +87,10 @@ public class UserControllerTests {
         mockMvc.perform(get("/api/v1/users/"
                 + users.get(0).getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id", is(users.get(0).getId().intValue())));
     }
 	
-	@Test
-    public void readSingleUse2r() throws Exception {
-        mockMvc.perform(get("/api/v1/users/"
-                + users.get(0).getId()))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.id", is(users.get(0).getId().intValue())));
-    }
+	
 	
 	@Test
     public void readAllUsers() throws Exception {
@@ -124,7 +116,7 @@ public class UserControllerTests {
     public void deleteUser() throws Exception {
     	
     	mockMvc.perform(delete("/api/v1/users/"
-                + users.get(0).getId()))
+                + users.get(1).getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id", is(users.get(0).getId().intValue())));
