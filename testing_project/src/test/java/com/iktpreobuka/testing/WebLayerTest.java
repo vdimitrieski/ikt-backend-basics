@@ -19,6 +19,9 @@ public class WebLayerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    
+    /*@MockBean
+    private GreetingService service;*/
 
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
