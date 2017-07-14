@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.iktpreobuka.serialization.controllers.util.RESTError;
 import com.iktpreobuka.serialization.entities.AddressEntity;
 import com.iktpreobuka.serialization.entities.UserEntity;
+import com.iktpreobuka.serialization.entities.dto.UserRegisterDTO;
 import com.iktpreobuka.serialization.security.Views;
 
 @RestController
@@ -92,6 +94,15 @@ public class UserController {
 			return new ResponseEntity<RESTError>(new RESTError(2, "Exception occurred: " + e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<?> createUser(@RequestBody UserRegisterDTO user) {
+		UserEntity ue = new UserEntity();
+		ue.setId(3);
+		ue.setEmail(user.getEmail());
+		ue.setName(user.getName());
+		return new ResponseEntity<UserEntity>(ue, HttpStatus.OK);
 	}
 
 }
