@@ -8,5 +8,5 @@ public class RestExamplesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestExamplesApplication.class, args);
-	}
+	} 
 }
