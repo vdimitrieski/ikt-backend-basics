@@ -8,9 +8,9 @@ public class Encryption {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder.encode("pass");
 	}
-	
+
 	public static void main(String[] args) {
-			System.out.println(getPassEncoded("pass"));	
+		System.out.println(getPassEncoded("pass"));
 	}
 
 }

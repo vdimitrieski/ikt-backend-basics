@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class FileHandlerImpl implements FileHandler {
 
 	// Save the uploaded file to this folder
-	private static String UPLOADED_FOLDER = "E://temp//";
+	private static String UPLOADED_FOLDER = "C://temp//";
 
 	@Override
 	public String singleFileUpload(MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
